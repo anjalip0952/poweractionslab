@@ -1,0 +1,21 @@
+name: Release action
+# Call the reusable workflow release-solution-to-prod-with-inputs.yml
+# Release your solution to prod when you create a new release.
+
+on:
+  release:
+      types: [created]        
+
+jobs:
+  Release-solution-CICDDemo:
+    uses: ./.github/workflows/release-solution-to-prod-with-inputs.yml
+    with:
+      #You can specify the solution name here
+      solution_name: CICDDemo
+      #Update your values here
+      BUILD_ENVIRONMENT_URL: https://org0d925923.crm8.dynamics.com
+      PRODUCTION_ENVIRONMENT_URL: https://org0d925923.crm8.dynamics.com
+      CLIENT_ID: 6cae9a3a-c9a1-47f4-b2d3-aecdae001bf8
+      TENANT_ID: 414d6624-89b5-405d-9a0d-414b798782e0    
+    secrets:
+      envSecret: ${{ secrets.PowerPlatformCICD }}
